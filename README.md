@@ -8,4 +8,5 @@ In this work, we present PointGPT, a novel approach that extends the concept of 
  <img src="./figures/net.png" width = "666"  align=center />
 </div>
 
+
 The code will be released soon!
