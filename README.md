@@ -1,5 +1,3 @@
-# PointGPT
-
 ## PointGPT: Auto-regressively Generative Pre-training from Point Clouds
 
 This is the official code of the paper [PointGPT: Auto-regressively Generative Pre-training from Point Clouds](https://arxiv.org/abs/2305.11487)
