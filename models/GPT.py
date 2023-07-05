@@ -30,7 +30,7 @@ class Block(nn.Module):
 
 class GPT_extractor(nn.Module):
     def __init__(
-        self, embed_dim, num_heads, num_layers, num_classes, trans_dim, group_size
+        self, embed_dim, num_heads, num_layers, num_classes, trans_dim, group_size, pretrained=False
     ):
         super(GPT_extractor, self).__init__()
 
@@ -52,19 +52,20 @@ class GPT_extractor(nn.Module):
             nn.Conv1d(self.trans_dim, 3*(self.group_size), 1)
         )
 
-        self.cls_head_finetune = nn.Sequential(
-            nn.Linear(self.trans_dim * 2, 256),
-            nn.BatchNorm1d(256),
-            nn.ReLU(inplace=True),
-            nn.Dropout(0.5),
-            nn.Linear(256, 256),
-            nn.BatchNorm1d(256),
-            nn.ReLU(inplace=True),
-            nn.Dropout(0.5),
-            nn.Linear(256, num_classes)
-        )
+        if pretrained == False:
+            self.cls_head_finetune = nn.Sequential(
+                nn.Linear(self.trans_dim * 2, 256),
+                nn.BatchNorm1d(256),
+                nn.ReLU(inplace=True),
+                nn.Dropout(0.5),
+                nn.Linear(256, 256),
+                nn.BatchNorm1d(256),
+                nn.ReLU(inplace=True),
+                nn.Dropout(0.5),
+                nn.Linear(256, num_classes)
+            )
 
-        self.cls_norm = nn.LayerNorm(self.trans_dim)
+            self.cls_norm = nn.LayerNorm(self.trans_dim)
 
     def forward(self, h, pos, attn_mask, classify=False):
         """
