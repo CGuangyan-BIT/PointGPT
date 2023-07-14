@@ -156,7 +156,11 @@ def run_net(args, config, train_writer=None, val_writer=None):
 
             _loss = loss + 3 * loss1
 
-            _loss.backward()
+            try:
+                _loss.backward()
+            except:
+                _loss = _loss.mean()
+                _loss.backward()
 
             # forward
             if num_iter == config.step_per_update:
@@ -172,7 +176,10 @@ def run_net(args, config, train_writer=None, val_writer=None):
                 acc = dist_utils.reduce_tensor(acc, args)
                 losses.update([loss.item(), loss1.item(), acc.item()])
             else:
-                losses.update([loss.item(), loss1.item(), acc.item()])
+                try:
+                    losses.update([loss.item(), loss1.item(), acc.item()])
+                except:
+                    losses.update([loss.mean().item(), loss1.mean().item(), acc.mean().item()])
 
             if args.distributed:
                 torch.cuda.synchronize()
