@@ -1,4 +1,4 @@
-optimizer: { type: AdamW, kwargs: { lr: 0.0005, weight_decay: 0.05 } }
+optimizer: { type: AdamW, kwargs: { lr: 0.0001, weight_decay: 0.05 } }
 
 scheduler: { type: CosLR, kwargs: { epochs: 300, initial_epochs: 10 } }
 
