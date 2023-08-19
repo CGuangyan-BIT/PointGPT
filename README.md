@@ -80,12 +80,12 @@ We use ShapeNet, ScanObjectNN, ModelNet40 and ShapeNetPart for pre-training the 
 | ----------------- | -------------- | --------------------------------------------------------------- | ---------- | --------------------------------------------------------------------------------------------- |
 | Pre-training      | UnlabeledHybrid       | [pretrain.yaml](./cfgs/PointGPT-L/pretrain.yaml)                           | N.A.       | [here](https://drive.google.com/file/d/1nzCwriFbC2QoDbRpGhWvf_DbFIkFU6zV/view?usp=sharing) |
 | Post-pre-training | LabeledHybrid       | [post_pretrain.yaml](./cfgs/PointGPT-L/post_pretrain.yaml)                        | N.A.       | [here](https://drive.google.com/file/d/1Kh6f6gFR12Y86FAeBtMU9NbNpB5vZnpu/view?usp=sharing) |
-| Classification    | ScanObjectNN   | [finetune_scan_hardest.yaml](./cfgs/PointGPT-L/finetune_scan_hardest.yaml) | 86.9%      | [here](https://drive.google.com/file/d/1e_qIfZCqQmq0eRpYhf9xrIxl6TkzsaZ9/view?usp=sharing) |
-| Classification    | ScanObjectNN   | [finetune_scan_objbg.yaml](./cfgs/PointGPT-L/finetune_scan_objbg.yaml)     | 91.6%      | [here](https://drive.google.com/file/d/1gd8gn0ffK0zfWv7AAUbygzIPSeeRU8fD/view?usp=sharing) |
-| Classification    | ScanObjectNN   | [finetune_scan_objonly.yaml](./cfgs/PointGPT-L/finetune_scan_objonly.yaml) | 90.0%      | [here](https://drive.google.com/file/d/1F2MnPmQGKnYUgmS5uz3PNInU23jWsNj1/view?usp=sharing) |
-| Classification    | ModelNet40(1k) | [finetune_modelnet.yaml](./cfgs/PointGPT-L/finetune_modelnet.yaml)         | 94.0%      | [here](https://drive.google.com/file/d/1ntWwZCvD_Tqykq9F7QrDKXH7aL-dcCsQ/view?usp=sharing) |
-| Classification    | ModelNet40(8k) | [finetune_modelnet_8k.yaml](./cfgs/PointGPT-L/finetune_modelnet_8k.yaml)   | 94.2%      | [here](https://drive.google.com/file/d/1gKgdbtIuRinJY-NElSHwrKAL5OhBjrGD/view?usp=sharing) |
-| Part segmentation | ShapeNetPart   | [segmentation](./segmentation)                                  | 86.2% mIoU | [here](https://drive.google.com/file/d/1d3fXLBkXvzl9YjX5DDMdm7rUtCvfwgUL/view?usp=sharing) |
+| Classification    | ScanObjectNN   | [finetune_scan_hardest.yaml](./cfgs/PointGPT-L/finetune_scan_hardest.yaml) | 93.4%      | [here](https://drive.google.com/file/d/1e_qIfZCqQmq0eRpYhf9xrIxl6TkzsaZ9/view?usp=sharing) |
+| Classification    | ScanObjectNN   | [finetune_scan_objbg.yaml](./cfgs/PointGPT-L/finetune_scan_objbg.yaml)     | 97.2%      | [here](https://drive.google.com/file/d/1gd8gn0ffK0zfWv7AAUbygzIPSeeRU8fD/view?usp=sharing) |
+| Classification    | ScanObjectNN   | [finetune_scan_objonly.yaml](./cfgs/PointGPT-L/finetune_scan_objonly.yaml) | 96.6%      | [here](https://drive.google.com/file/d/1F2MnPmQGKnYUgmS5uz3PNInU23jWsNj1/view?usp=sharing) |
+| Classification    | ModelNet40(1k) | [finetune_modelnet.yaml](./cfgs/PointGPT-L/finetune_modelnet.yaml)         | 94.7%      | [here](https://drive.google.com/file/d/1ntWwZCvD_Tqykq9F7QrDKXH7aL-dcCsQ/view?usp=sharing) |
+| Classification    | ModelNet40(8k) | [finetune_modelnet_8k.yaml](./cfgs/PointGPT-L/finetune_modelnet_8k.yaml)   | 94.9%      | [here](https://drive.google.com/file/d/1gKgdbtIuRinJY-NElSHwrKAL5OhBjrGD/view?usp=sharing) |
+| Part segmentation | ShapeNetPart   | [segmentation](./segmentation)                                  | 86.6% mIoU | [here](https://drive.google.com/file/d/1d3fXLBkXvzl9YjX5DDMdm7rUtCvfwgUL/view?usp=sharing) |
 
 | Task              | Dataset    | Config                              | 5w10s Acc. (%) | 5w20s Acc. (%) | 10w10s Acc. (%) | 10w20s Acc. (%) |
 | ----------------- | ---------- | ----------------------------------- | -------------- | -------------- | --------------- | --------------- |
