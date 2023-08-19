@@ -1,2 +1,2 @@
 NAME: ScanObjectNN
-ROOT: data/ScanObjectNN/main_split_nobg
+ROOT: data/ScanObjectNN/h5_files/main_split

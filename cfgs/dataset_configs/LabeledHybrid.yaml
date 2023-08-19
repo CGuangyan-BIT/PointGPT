@@ -1,0 +1,6 @@
+NAME: LabeledHybrid
+DATA_PATH: data/LabeledHybrid/data_path
+N_POINTS: 2048
+PC_PATH: data/LabeledHybrid/pc_path
+npoints: 1024
+NUM_CATEGORY: 87

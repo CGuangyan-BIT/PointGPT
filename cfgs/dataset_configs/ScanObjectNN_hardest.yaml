@@ -1,2 +1,2 @@
 NAME: ScanObjectNN_hardest
-ROOT: data/ScanObjectNN/main_split
+ROOT: data/ScanObjectNN/h5_files/main_split

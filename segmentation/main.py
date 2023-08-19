@@ -48,7 +48,8 @@ def to_categorical(y, num_classes):
 
 def parse_args():
     parser = argparse.ArgumentParser('Model')
-    parser.add_argument('--model', type=str, default='pt', help='model name')
+    parser.add_argument('--model', type=str, default='pt')
+    parser.add_argument('--model_name', type=str, default='PointGPT_S', choices=['PointGPT_S', 'PointGPT_B', 'PointGPT_L'])
     parser.add_argument('--batch_size', type=int, default=32, # 16, 32
                         help='batch Size during training')
     parser.add_argument('--epoch', default=300, type=int, help='epoch to run')
@@ -66,14 +67,32 @@ def parse_args():
                         default=2048, help='point Number')
     parser.add_argument('--normal', action='store_true',
                         default=False, help='use normals')
+
     # parser.add_argument('--step_size', type=int, default=20, help='decay step for lr decay')
     # parser.add_argument('--lr_decay', type=float, default=0.5, help='decay rate for lr decay')
     parser.add_argument(
         '--ckpts', type=str, default='../best/pretrain/m0.6R_1_pretrain300.pth', help='ckpts')
     parser.add_argument(
-        '--root', type=str, default='/data/cgy/ShapenetPart/shapenetcore_partanno_segmentation_benchmark_v0_normal/', help='data root')
+        '--root', type=str, default='data/ShapenetPart/shapenetcore_partanno_segmentation_benchmark_v0_normal/', help='data root')
     return parser.parse_args()
 
+def get_model_loss(MODEL, args, num_part):
+    if args.model_name == 'PointGPT_S':
+        classifier = MODEL.get_model(num_part, trans_dim=384, depth=12, drop_path_rate=0.1, num_heads=6, decoder_depth=4, group_size=32, num_group=128, prop_dim=1024, label_dim1=512, label_dim2=256, encoder_dims=384)
+        classifier = classifier.cuda()
+        criterion = MODEL.get_loss().cuda()
+        classifier.apply(inplace_relu)  
+    elif args.model_name == 'PointGPT_B':
+        classifier = MODEL.get_model(num_part, trans_dim=768, depth=12, drop_path_rate=0.1, num_heads=12, decoder_depth=4, group_size=32, num_group=128, prop_dim=2048, label_dim1=1024, label_dim2=512, encoder_dims=768)
+        classifier = classifier.cuda()
+        criterion = MODEL.get_loss().cuda()
+        classifier.apply(inplace_relu)  
+    elif args.model_name == 'PointGPT_L':
+        classifier = MODEL.get_model(num_part, trans_dim=1024, depth=24, drop_path_rate=0.1, num_heads=16, decoder_depth=4, group_size=32, num_group=128, prop_dim=2048, label_dim1=1024, label_dim2=512, encoder_dims=1024)
+        classifier = classifier.cuda()
+        criterion = MODEL.get_loss().cuda()
+        classifier.apply(inplace_relu)  
+    return classifier, criterion   
 
 def main(args):
     def log_string(str):
@@ -81,7 +100,7 @@ def main(args):
         print(str)
 
     '''HYPER PARAMETER'''
-    os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu
+    # os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu
 
     '''CREATE DIR'''
     timestr = str(datetime.datetime.now().strftime('%Y-%m-%d_%H-%M'))
@@ -132,10 +151,9 @@ def main(args):
     MODEL = importlib.import_module(args.model)
     shutil.copy('models/%s.py' % args.model, str(exp_dir))
     # shutil.copy('models/pointnet2_utils.py', str(exp_dir))
+    
+    classifier, criterion = get_model_loss(MODEL, args, num_part)
 
-    classifier = MODEL.get_model(num_part).cuda()
-    criterion = MODEL.get_loss().cuda()
-    classifier.apply(inplace_relu)
     print('# generator parameters:', sum(param.numel()
           for param in classifier.parameters()))
     start_epoch = 0
@@ -165,9 +183,9 @@ def main(args):
 
     scheduler = CosineLRScheduler(optimizer,
                                   t_initial=args.epoch,
-                                  t_mul=1,
+                                #   t_mul=1,
                                   lr_min=1e-6,
-                                  decay_rate=0.1,
+                                  cycle_decay=0.1,
                                   warmup_lr_init=1e-6,
                                   warmup_t=args.warmup_epoch,
                                   cycle_limit=1,

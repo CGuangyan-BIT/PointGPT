@@ -1,0 +1,4 @@
+NAME: UnlabeledHybrid
+DATA_PATH: data/UnlabeledHybrid/data_path
+N_POINTS: 2048
+PC_PATH: data/UnlabeledHybrid/pc_path

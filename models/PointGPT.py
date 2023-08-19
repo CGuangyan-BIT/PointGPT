@@ -15,8 +15,44 @@ from models.GPT import GPT_extractor, GPT_generator
 import math
 from models.z_order import *
 
+class Encoder_large(nn.Module):  # Embedding module
+    def __init__(self, encoder_channel):
+        super().__init__()
+        self.encoder_channel = encoder_channel
+        self.first_conv = nn.Sequential(
+            nn.Conv1d(3, 256, 1),
+            nn.BatchNorm1d(256),
+            nn.ReLU(inplace=True),
+            nn.Conv1d(256, 512, 1),
+            nn.BatchNorm1d(512),
+            nn.ReLU(inplace=True),
+            nn.Conv1d(512, 1024, 1)
+        )
+        self.second_conv = nn.Sequential(
+            nn.Conv1d(2048, 2048, 1),
+            nn.BatchNorm1d(2048),
+            nn.ReLU(inplace=True),
+            nn.Conv1d(2048, self.encoder_channel, 1)
+        )
 
-class Encoder(nn.Module):  # Embedding module
+    def forward(self, point_groups):
+        '''
+            point_groups : B G N 3
+            -----------------
+            feature_global : B G C
+        '''
+        bs, g, n, _ = point_groups.shape
+        point_groups = point_groups.reshape(bs * g, n, 3)
+        # encoder
+        feature = self.first_conv(point_groups.transpose(2, 1))  # BG 256 n
+        feature_global = torch.max(feature, dim=2, keepdim=True)[0]  # BG 256 1
+        feature = torch.cat(
+            [feature_global.expand(-1, -1, n), feature], dim=1)  # BG 512 n
+        feature = self.second_conv(feature)  # BG 1024 n
+        feature_global = torch.max(feature, dim=2, keepdim=False)[0]  # BG 1024
+        return feature_global.reshape(bs, g, self.encoder_channel)
+
+class Encoder_small(nn.Module):  # Embedding module
     def __init__(self, encoder_channel):
         super().__init__()
         self.encoder_channel = encoder_channel
@@ -283,7 +319,12 @@ class GPT_Transformer(nn.Module):
         print_log(f'[args] {config.transformer_config}', logger='Transformer')
 
         self.encoder_dims = config.transformer_config.encoder_dims
-        self.encoder = Encoder(encoder_channel=self.encoder_dims)
+
+        assert self.encoder_dims in [384, 768, 1024]
+        if self.encoder_dims == 384:
+            self.encoder = Encoder_small(encoder_channel=self.encoder_dims)
+        else:
+            self.encoder = Encoder_large(encoder_channel=self.encoder_dims)
 
         self.pos_embed = PositionEmbeddingCoordsSine(3, self.encoder_dims, 1.0)
 
@@ -476,7 +517,11 @@ class PointTransformer(nn.Module):
         self.group_divider = Group(
             num_group=self.num_group, group_size=self.group_size)
 
-        self.encoder = Encoder(encoder_channel=self.encoder_dims)
+        assert self.encoder_dims in [384, 768, 1024]
+        if self.encoder_dims == 384:
+            self.encoder = Encoder_small(encoder_channel=self.encoder_dims)
+        else:
+            self.encoder = Encoder_large(encoder_channel=self.encoder_dims)
 
         self.pos_embed = PositionEmbeddingCoordsSine(3, self.encoder_dims, 1.0)
 
@@ -542,6 +587,8 @@ class PointTransformer(nn.Module):
                     del base_ckpt[k]
                 elif k.startswith('base_model'):
                     base_ckpt[k[len('base_model.'):]] = base_ckpt[k]
+                    del base_ckpt[k]
+                if 'cls_head_finetune' in k:
                     del base_ckpt[k]
 
             incompatible = self.load_state_dict(base_ckpt, strict=False)

@@ -118,8 +118,7 @@ class Group(nn.Module):
 
         return neighborhood, center
 
-
-class Encoder(nn.Module):
+class Encoder_small(nn.Module):
     def __init__(self, encoder_channel):
         super().__init__()
         self.encoder_channel = encoder_channel
@@ -152,6 +151,42 @@ class Encoder(nn.Module):
         feature_global = torch.max(feature, dim=2, keepdim=False)[0]
         return feature_global.reshape(bs, g, self.encoder_channel)
 
+class Encoder_large(nn.Module):  # Embedding module
+    def __init__(self, encoder_channel):
+        super().__init__()
+        self.encoder_channel = encoder_channel
+        self.first_conv = nn.Sequential(
+            nn.Conv1d(3, 256, 1),
+            nn.BatchNorm1d(256),
+            nn.ReLU(inplace=True),
+            nn.Conv1d(256, 512, 1),
+            nn.BatchNorm1d(512),
+            nn.ReLU(inplace=True),
+            nn.Conv1d(512, 1024, 1)
+        )
+        self.second_conv = nn.Sequential(
+            nn.Conv1d(2048, 2048, 1),
+            nn.BatchNorm1d(2048),
+            nn.ReLU(inplace=True),
+            nn.Conv1d(2048, self.encoder_channel, 1)
+        )
+
+    def forward(self, point_groups):
+        '''
+            point_groups : B G N 3
+            -----------------
+            feature_global : B G C
+        '''
+        bs, g, n, _ = point_groups.shape
+        point_groups = point_groups.reshape(bs * g, n, 3)
+        # encoder
+        feature = self.first_conv(point_groups.transpose(2, 1))  # BG 256 n
+        feature_global = torch.max(feature, dim=2, keepdim=True)[0]  # BG 256 1
+        feature = torch.cat(
+            [feature_global.expand(-1, -1, n), feature], dim=1)  # BG 512 n
+        feature = self.second_conv(feature)  # BG 1024 n
+        feature_global = torch.max(feature, dim=2, keepdim=False)[0]  # BG 1024
+        return feature_global.reshape(bs, g, self.encoder_channel)
 
 class Mlp(nn.Module):
     def __init__(self, in_features, hidden_features=None, out_features=None, act_layer=nn.GELU, drop=0.):
@@ -301,30 +336,34 @@ class PositionEmbeddingCoordsSine(nn.Module):
 
 
 class get_model(nn.Module):
-    def __init__(self, cls_dim):
+    def __init__(self, cls_dim, trans_dim=384, depth=12, drop_path_rate=0.1, num_heads=6, decoder_depth=4, group_size=32, num_group=128, prop_dim=1024, label_dim1=512, label_dim2=256, encoder_dims=384):
         super().__init__()
 
-        self.trans_dim = 384
-        self.depth = 12
-        self.drop_path_rate = 0.1
+        self.trans_dim = trans_dim
+        self.depth = depth
+        self.drop_path_rate = drop_path_rate
         self.cls_dim = cls_dim
-        self.num_heads = 6
+        self.num_heads = num_heads
 
-        self.decoder_depth = 4
+        self.decoder_depth = decoder_depth
 
-        self.group_size = 32
-        self.num_group = 128
+        self.group_size = group_size
+        self.num_group = num_group
 
-        self.prop_dim = 1024
+        self.prop_dim = prop_dim
 
-        self.label_dim1 = 512
-        self.label_dim2 = 256
+        self.label_dim1 = label_dim1
+        self.label_dim2 = label_dim2
         # grouper
         self.group_divider = Group(
             num_group=self.num_group, group_size=self.group_size)
         # define the encoder
-        self.encoder_dims = 384
-        self.encoder = Encoder(encoder_channel=self.encoder_dims)
+        self.encoder_dims = encoder_dims
+        assert encoder_dims in [384, 768, 1024]
+        if encoder_dims == 384:
+            self.encoder = Encoder_small(encoder_channel=self.encoder_dims)
+        else:
+            self.encoder = Encoder_large(encoder_channel=self.encoder_dims)
         # bridge encoder and transformer
 
         self.pos_embed = PositionEmbeddingCoordsSine(3, self.encoder_dims, 1.0)

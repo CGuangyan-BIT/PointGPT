@@ -77,7 +77,7 @@ def build_opti_sche(base_model, config):
                                       t_initial=sche_config.kwargs.epochs,
                                       # t_mul=1,
                                       lr_min=1e-6,
-                                      decay_rate=0.1,  # decay_rate
+                                      cycle_decay=0.1,  # decay_rate
                                       warmup_lr_init=1e-6,
                                       warmup_t=sche_config.kwargs.initial_epochs,
                                       cycle_limit=1,
