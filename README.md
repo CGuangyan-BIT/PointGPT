@@ -145,6 +145,75 @@ python main_vis.py --test --ckpts <path/to/pre-trained/model> --config cfgs/<MOD
  <img src="./figures/vis.png" width = "900"  align=center />
 </div>
 
+## 7. Ablation studies on post-pre-training stage 
+<table>
+  <thead>
+    <tr>
+      <th rowspan="2">Methods</th>
+      <th colspan="3"><u>ScanObjectNN</u></th>
+      <th colspan="2"><u>ModelNet40</u></th>
+      <th colspan="2">ShapeNetPart</th>
+    </tr>
+    <tr>
+      <th>OBJ_BG</th>
+      <th>OBJ_ONLY</th>
+      <th>PB_T50_RS</th>
+      <th>1k P</th>
+      <th>8k P</th>
+      <th>Cls.mIoU</th>
+      <th>Inst.mIoU</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th colspan="8">without post-pre-training</th>
+    </tr>
+    <tr>
+      <td><i>PointGPT-B</i></td>
+      <td>93.6</td>
+      <td>92.5</td>
+      <td>89.6</td>
+      <td>94.2</td>
+      <td>94.4</td>
+      <td>84.5</td>
+      <td>86.4</td>
+    </tr>
+    <tr>
+      <td><i>PointGPT-L</i></td>
+      <td>95.7</td>
+      <td>94.1</td>
+      <td>91.1</td>
+      <td>94.5</td>
+      <td>94.7</td>
+      <td>84.7</td>
+      <td>86.5</td>
+    </tr>
+    <tr>
+      <th colspan="8">with post-pre-training</th>
+    </tr>
+    <tr>
+      <td><i>PointGPT-B</i></td>
+      <td>95.8 <span style="color:green">(+2.2)</span></td>
+      <td>95.2 <span style="color:green">(+2.7)</span></td>
+      <td>91.9 <span style="color:green">(+2.3)</span></td>
+      <td>94.4 <span style="color:green">(+0.2)</span></td>
+      <td>94.6 <span style="color:green">(+0.2)</span></td>
+      <td>84.5 <span style="color:green">(+0.0)</span></td>
+      <td>86.5 <span style="color:green">(+0.1)</span></td>
+    </tr>
+    <tr>
+      <td><i>PointGPT-L</i></td>
+      <td>97.2 <span style="color:green">(+1.5)</span></td>
+      <td>96.6 <span style="color:green">(+2.5)</span></td>
+      <td>93.4 <span style="color:green">(+2.3)</span></td>
+      <td>94.7 <span style="color:green">(+0.2)</span></td>
+      <td>94.9 <span style="color:green">(+0.2)</span></td>
+      <td>84.8 <span style="color:green">(+0.1)</span></td>
+      <td>86.6 <span style="color:green">(+0.1)</span></td>
+    </tr>
+  </tbody>
+</table>
+
 
 ## Acknowledgements
 
