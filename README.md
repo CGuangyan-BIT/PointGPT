@@ -102,7 +102,7 @@ CUDA_VISIBLE_DEVICES=<GPU> python main.py --config cfgs/<MODEL_NAME>/pretrain.ya
 To post-pretrain PointGPT, run the following command. 
 
 ```
-CUDA_VISIBLE_DEVICES=<GPU> python main.py --config cfgs/<MODEL_NAME>/post_pretrain.yaml --exp_name <output_file_name>
+CUDA_VISIBLE_DEVICES=<GPU> python main.py --config cfgs/<MODEL_NAME>/post_pretrain.yaml --exp_name <output_file_name> --finetune_model
 ```
 
 ## 5. PointGPT Fine-tuning
