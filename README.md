@@ -10,6 +10,8 @@ In this work, we present PointGPT, a novel approach that extends the concept of 
 
 ## News
 
+[2023.09.08] Unlabeled hybrid datasets and labeled hybrid datasets have been released!
+
 [2023.08.19] Code has been updated; PointGPT-B and PointGPT-L models have been released!
 
 [2023.06.20] Code and the PointGPT-S models have been released!
