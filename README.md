@@ -10,7 +10,7 @@ In this work, we present PointGPT, a novel approach that extends the concept of 
 
 ## News
 
-[2023.09.08] Unlabeled hybrid datasets and labeled hybrid datasets have been released!
+[2023.09.08] Unlabeled hybrid dataset and labeled hybrid dataset have been released!
 
 [2023.08.19] Code has been updated; PointGPT-B and PointGPT-L models have been released!
 
@@ -45,7 +45,7 @@ pip install --upgrade https://github.com/unlimblue/KNN_CUDA/releases/download/0.
 
 Our training data for the PointGPT-S model encompasses ShapeNet, ScanObjectNN, ModelNet40, and ShapeNetPart datasets. For detailed information, please refer to [DATASET.md](./DATASET.md).
 
-To pretrain the PointGPT-B and PointGPT-L models, we employ both Unlabeled hybrid datasets and labeled hybrid datasets, available for download [here](https://drive.google.com/file/d/1TWgd3eJX1HDruFfU9JrGnBfcVhzJIXqT/view?usp=sharing).
+To pretrain the PointGPT-B and PointGPT-L models, we employ both unlabeled hybrid dataset and labeled hybrid dataset, available for download [here](https://drive.google.com/file/d/1TWgd3eJX1HDruFfU9JrGnBfcVhzJIXqT/view?usp=sharing).
 
 
 
@@ -225,7 +225,7 @@ python main_vis.py --test --ckpts <path/to/pre-trained/model> --config cfgs/<MOD
 
 Our codes are built upon [Point-MAE](https://github.com/Pang-Yatian/Point-MAE), [Point-BERT](https://github.com/lulutang0608/Point-BERT), [Pointnet2_PyTorch](https://github.com/erikwijmans/Pointnet2_PyTorch) and [Pointnet_Pointnet2_pytorch](https://github.com/yanx27/Pointnet_Pointnet2_pytorch)
 
-The unlabeled hybrid datasets and labeled hybrid datasets are built upon [ModelNet40](https://3dshapenets.cs.princeton.edu/), [PartNet](https://partnet.cs.stanford.edu/), [ShapeNet](http://www.shapenet.org), [S3DIS](http://buildingparser.stanford.edu/), [ScanObjectNN](https://hkust-vgd.github.io/scanobjectnn/), [SUN RGB-D](https://rgbd.cs.princeton.edu/), and [Semantic3D](http://semantic3d.net/)
+The unlabeled hybrid dataset and labeled hybrid dataset are built upon [ModelNet40](https://3dshapenets.cs.princeton.edu/), [PartNet](https://partnet.cs.stanford.edu/), [ShapeNet](http://www.shapenet.org), [S3DIS](http://buildingparser.stanford.edu/), [ScanObjectNN](https://hkust-vgd.github.io/scanobjectnn/), [SUN RGB-D](https://rgbd.cs.princeton.edu/), and [Semantic3D](http://semantic3d.net/)
 
 
 ## Reference
@@ -239,7 +239,7 @@ The unlabeled hybrid datasets and labeled hybrid datasets are built upon [ModelN
 }
 ```
 
-For unlabeled hybrid datasets or labeled hybrid datasets, please also cite the following work.
+For unlabeled hybrid dataset or labeled hybrid dataset, please also cite the following work.
 
 ```
 @inproceedings{wu20153d,
