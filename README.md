@@ -225,6 +225,9 @@ python main_vis.py --test --ckpts <path/to/pre-trained/model> --config cfgs/<MOD
 
 Our codes are built upon [Point-MAE](https://github.com/Pang-Yatian/Point-MAE), [Point-BERT](https://github.com/lulutang0608/Point-BERT), [Pointnet2_PyTorch](https://github.com/erikwijmans/Pointnet2_PyTorch) and [Pointnet_Pointnet2_pytorch](https://github.com/yanx27/Pointnet_Pointnet2_pytorch)
 
+The unlabeled hybrid datasets and labeled hybrid datasets are built upon [ModelNet40](https://3dshapenets.cs.princeton.edu/), [PartNet](https://partnet.cs.stanford.edu/), [ShapeNet](http://www.shapenet.org), [S3DIS](http://buildingparser.stanford.edu/), [ScanObjectNN](https://hkust-vgd.github.io/scanobjectnn/), [SUN RGB-D](https://rgbd.cs.princeton.edu/), [Semantic3D](http://semantic3d.net/)
+
+
 ## Reference
 
 ```
@@ -233,5 +236,62 @@ Our codes are built upon [Point-MAE](https://github.com/Pang-Yatian/Point-MAE), 
   author={Chen, Guangyan and Wang, Meiling and Yang, Yi and Yu, Kai and Yuan, Li and Yue, Yufeng},
   journal={arXiv preprint arXiv:2305.11487},
   year={2023}
+}
+```
+
+For unlabeled hybrid datasets or labeled hybrid datasets, please also cite the following work.
+
+```
+@inproceedings{wu20153d,
+  title={3d shapenets: A deep representation for volumetric shapes},
+  author={Wu, Zhirong and Song, Shuran and Khosla, Aditya and Yu, Fisher and Zhang, Linguang and Tang, Xiaoou and Xiao, Jianxiong},
+  booktitle={Proceedings of the IEEE conference on computer vision and pattern recognition},
+  pages={1912--1920},
+  year={2015}
+}
+
+@inproceedings{mo2019partnet,
+  title={Partnet: A large-scale benchmark for fine-grained and hierarchical part-level 3d object understanding},
+  author={Mo, Kaichun and Zhu, Shilin and Chang, Angel X and Yi, Li and Tripathi, Subarna and Guibas, Leonidas J and Su, Hao},
+  booktitle={Proceedings of the IEEE/CVF conference on computer vision and pattern recognition},
+  pages={909--918},
+  year={2019}
+}
+
+@article{chang2015shapenet,
+  title={Shapenet: An information-rich 3d model repository},
+  author={Chang, Angel X and Funkhouser, Thomas and Guibas, Leonidas and Hanrahan, Pat and Huang, Qixing and Li, Zimo and Savarese, Silvio and Savva, Manolis and Song, Shuran and Su, Hao and others},
+  journal={arXiv preprint arXiv:1512.03012},
+  year={2015}
+}
+
+@inproceedings{armeni20163d,
+  title={3d semantic parsing of large-scale indoor spaces},
+  author={Armeni, Iro and Sener, Ozan and Zamir, Amir R and Jiang, Helen and Brilakis, Ioannis and Fischer, Martin and Savarese, Silvio},
+  booktitle={Proceedings of the IEEE conference on computer vision and pattern recognition},
+  pages={1534--1543},
+  year={2016}
+}
+
+@inproceedings{uy-scanobjectnn-iccv19,
+      title = {Revisiting Point Cloud Classification: A New Benchmark Dataset and Classification Model on Real-World Data},
+      author = {Mikaela Angelina Uy and Quang-Hieu Pham and Binh-Son Hua and Duc Thanh Nguyen and Sai-Kit Yeung},
+      booktitle = {International Conference on Computer Vision (ICCV)},
+      year = {2019}
+}
+
+@inproceedings{song2015sun,
+  title={Sun rgb-d: A rgb-d scene understanding benchmark suite},
+  author={Song, Shuran and Lichtenberg, Samuel P and Xiao, Jianxiong},
+  booktitle={Proceedings of the IEEE conference on computer vision and pattern recognition},
+  pages={567--576},
+  year={2015}
+}
+
+@article{hackel2017semantic3d,
+  title={Semantic3d. net: A new large-scale point cloud classification benchmark},
+  author={Hackel, Timo and Savinov, Nikolay and Ladicky, Lubor and Wegner, Jan D and Schindler, Konrad and Pollefeys, Marc},
+  journal={arXiv preprint arXiv:1704.03847},
+  year={2017}
 }
 ```
