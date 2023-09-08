@@ -1,5 +1,5 @@
 NAME: LabeledHybrid
-DATA_PATH: data/LabeledHybrid/pretrain
+DATA_PATH: data/LabeledHybrid/post_pretrain
 N_POINTS: 2048
 PC_PATH: data/LabeledHybrid
 npoints: 1024
