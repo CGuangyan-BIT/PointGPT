@@ -225,7 +225,7 @@ python main_vis.py --test --ckpts <path/to/pre-trained/model> --config cfgs/<MOD
 
 Our codes are built upon [Point-MAE](https://github.com/Pang-Yatian/Point-MAE), [Point-BERT](https://github.com/lulutang0608/Point-BERT), [Pointnet2_PyTorch](https://github.com/erikwijmans/Pointnet2_PyTorch) and [Pointnet_Pointnet2_pytorch](https://github.com/yanx27/Pointnet_Pointnet2_pytorch)
 
-The unlabeled hybrid datasets and labeled hybrid datasets are built upon [ModelNet40](https://3dshapenets.cs.princeton.edu/), [PartNet](https://partnet.cs.stanford.edu/), [ShapeNet](http://www.shapenet.org), [S3DIS](http://buildingparser.stanford.edu/), [ScanObjectNN](https://hkust-vgd.github.io/scanobjectnn/), [SUN RGB-D](https://rgbd.cs.princeton.edu/), [Semantic3D](http://semantic3d.net/)
+The unlabeled hybrid datasets and labeled hybrid datasets are built upon [ModelNet40](https://3dshapenets.cs.princeton.edu/), [PartNet](https://partnet.cs.stanford.edu/), [ShapeNet](http://www.shapenet.org), [S3DIS](http://buildingparser.stanford.edu/), [ScanObjectNN](https://hkust-vgd.github.io/scanobjectnn/), [SUN RGB-D](https://rgbd.cs.princeton.edu/), and [Semantic3D](http://semantic3d.net/)
 
 
 ## Reference
