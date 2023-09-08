@@ -41,8 +41,9 @@ pip install --upgrade https://github.com/unlimblue/KNN_CUDA/releases/download/0.
 
 ## 2. Datasets
 
-We use ShapeNet, ScanObjectNN, ModelNet40 and ShapeNetPart for training the PointGPT-S model. See [DATASET.md](./DATASET.md) for details.
-We use Unlabeled hybrid datasets and labeled hybrid datasets to pretrain PointGPT-B and PointGPT-L models, which can be downloaded from [here](https://drive.google.com/file/d/1TWgd3eJX1HDruFfU9JrGnBfcVhzJIXqT/view?usp=sharing).
+Our training data for the PointGPT-S model encompasses ShapeNet, ScanObjectNN, ModelNet40, and ShapeNetPart datasets. For detailed information, please refer to [DATASET.md](./DATASET.md).
+
+To pretrain the PointGPT-B and PointGPT-L models, we employ both Unlabeled hybrid datasets and labeled hybrid datasets, available for download at the following link: [here](https://drive.google.com/file/d/1TWgd3eJX1HDruFfU9JrGnBfcVhzJIXqT/view?usp=sharing).
 
 
 
