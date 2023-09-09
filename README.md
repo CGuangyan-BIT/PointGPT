@@ -274,10 +274,10 @@ For unlabeled hybrid dataset or labeled hybrid dataset, please also cite the fol
 }
 
 @inproceedings{uy-scanobjectnn-iccv19,
-      title = {Revisiting Point Cloud Classification: A New Benchmark Dataset and Classification Model on Real-World Data},
-      author = {Mikaela Angelina Uy and Quang-Hieu Pham and Binh-Son Hua and Duc Thanh Nguyen and Sai-Kit Yeung},
-      booktitle = {International Conference on Computer Vision (ICCV)},
-      year = {2019}
+  title = {Revisiting Point Cloud Classification: A New Benchmark Dataset and Classification Model on Real-World Data},
+  author = {Mikaela Angelina Uy and Quang-Hieu Pham and Binh-Son Hua and Duc Thanh Nguyen and Sai-Kit Yeung},
+  booktitle = {International Conference on Computer Vision (ICCV)},
+  year = {2019}
 }
 
 @inproceedings{song2015sun,
