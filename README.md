@@ -10,6 +10,8 @@ In this work, we present PointGPT, a novel approach that extends the concept of 
 
 ## News
 
+[2023.09.22] PointGPT has been accepted by NeurIPS 2023!
+
 [2023.09.08] Unlabeled hybrid dataset and labeled hybrid dataset have been released!
 
 [2023.08.19] Code has been updated; PointGPT-B and PointGPT-L models have been released!
