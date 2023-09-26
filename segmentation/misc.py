@@ -134,7 +134,7 @@ class BNMomentumScheduler(object):
 
 def seprate_point_cloud(xyz, num_points, crop, fixed_points=None, padding_zeros=False):
     '''
-     seprate point cloud: usage : using to generate the incomplete point cloud with a setted number.
+     separate point cloud: usage : using to generate the incomplete point cloud with a setted number.
     '''
     _, n, c = xyz.shape
 
