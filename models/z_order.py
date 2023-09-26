@@ -56,7 +56,7 @@ def get_z_order(x, y, z):
         1- Split all coordinates by 3 (add 2 zeros between bits)
         2- Shift bits left by 1 for y and 2 for z
         3- Interleave x, shifted y, and shifted z
-    The mordon order is the final interleaved bit sequence
+    The Morton order is the final interleaved bit sequence
 
     :param x: x coordinates
     :param y: y coordinates
