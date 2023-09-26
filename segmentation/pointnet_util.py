@@ -257,7 +257,7 @@ class PointNetSetAbstractionMsg(nn.Module):
         return new_xyz, new_points_concat
 
 
-# NoteL this function swaps N and C
+# Note: this function swaps N and C
 class PointNetFeaturePropagation(nn.Module):
     def __init__(self, in_channel, mlp):
         super(PointNetFeaturePropagation, self).__init__()
