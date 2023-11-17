@@ -378,8 +378,10 @@ class GPT_Transformer(nn.Module):
         batch_size, seq_len, C = group_input_tokens.size()
 
         relative_position = center[:, 1:, :] - center[:, :-1, :]
+        relative_norm = torch.norm(relative_position, dim=-1, keepdim=True)
+        relative_direction = relative_position / relative_norm
         position = torch.cat(
-            [center[:, 0, :].unsqueeze(1), relative_position], dim=1)
+            [center[:, 0, :].unsqueeze(1), relative_direction], dim=1)
         pos_relative = self.pos_embed(position)
 
         sos_pos = self.sos_pos.expand(group_input_tokens.size(0), -1, -1)
@@ -641,8 +643,10 @@ class PointTransformer(nn.Module):
         pos = torch.cat([sos_pos, pos], dim=1)
 
         relative_position = center[:, 1:, :] - center[:, :-1, :]
+        relative_norm = torch.norm(relative_position, dim=-1, keepdim=True)
+        relative_direction = relative_position / relative_norm
         position = torch.cat(
-            [center[:, 0, :].unsqueeze(1), relative_position], dim=1)
+            [center[:, 0, :].unsqueeze(1), relative_direction], dim=1)
         pos_relative = self.pos_embed(position)
 
         x = torch.cat((cls_tokens, group_input_tokens), dim=1)
