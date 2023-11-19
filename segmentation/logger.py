@@ -232,7 +232,7 @@ def _group_to_str(group: List[str]) -> str:
     Args:
         group (list[str]): list of parameter name suffixes.
     Returns:
-        str: formated string.
+        str: formatted string.
     """
     if len(group) == 0:
         return ""
